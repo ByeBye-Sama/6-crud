@@ -1,4 +1,4 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin'); 
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -7,7 +7,7 @@ module.exports = {
   entry: './src/scripts/index.js',
   output: {
     filename: 'main.js',
-    path: path.resolve(__dirname, 'dist/scripts')
+    path: path.resolve(__dirname, 'dist')
   },
   module: {
     rules: [
@@ -17,11 +17,27 @@ module.exports = {
         loader: ['babel-loader', 'eslint-loader']
       },
       {
-        test: /\.scss$/,
+        test: /\.(scss)$/,
         use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader'
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: function () {
+                return [
+                  require('autoprefixer')
+                ];
+              }
+            }
+          },
+          {
+            loader: 'sass-loader'
+          }
         ]
       },
       {
