@@ -15,7 +15,7 @@ Modal.prototype.addEvents = function addEvents() {
   const close = this.element.querySelectorAll('.js_closeOutButton');
   for (let i = 0; i < close.length; i += 1) {
     close[i].addEventListener('click', () => {
-      console.log('close');
+      this.close();
     });
   }
 };
