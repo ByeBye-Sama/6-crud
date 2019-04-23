@@ -22,18 +22,18 @@
       <form>
         <div class="row mt-2 mb-4">
           <div class="col">
-            <input type="text" class="form-control" placeholder="First name">
+            <input type="text" class="form-control js_firstName" placeholder="First name">
           </div>
           <div class="col">
-            <input type="text" class="form-control" placeholder="Last name">
+            <input type="text" class="form-control js_lastName" placeholder="Last name">
           </div>
         </div>
         <div class="row my-4">
           <div class="col">
-            <input type="text" class="form-control" placeholder="Mail">
+            <input type="text" class="form-control js_mail" placeholder="Mail">
           </div>
           <div class="col">
-            <input type="text" class="form-control" placeholder="Phone">
+            <input type="text" class="form-control js_phone" placeholder="Phone">
           </div>
         </div>
         <div class="row my-4">
@@ -46,7 +46,7 @@
             </select>
           </div>
           <div class="col">
-            <input type="text" class="form-control" placeholder="Photo URL">
+            <input type="text" class="form-control js_photoURL" placeholder="Photo URL">
           </div>
         </div>
 
@@ -55,11 +55,12 @@
         </div>
 
         <div class="d-flex justify-content-around">
-          <button type="button" class="btn btn-outline-light px-5 js_closeOutButton">Accept</button>
+          <button type="button" class="btn btn-outline-light px-5 js_closeOutButton js_acceptButton">Accept</button>
           <button type="button" class="btn btn-outline-secondary px-5 js_closeOutButton">Cancel</button>
         </div>
       </form>
     </div>
+    <div class="card-deck js_newContent"></div>
   </div>
 
 <script type="text/javascript" src="main.js"></script></body>
