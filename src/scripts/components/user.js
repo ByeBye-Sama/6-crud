@@ -87,12 +87,7 @@ function addDom(element) {
 
 function editUser(div, value) {
   const { refs } = getRef();
-  console.log('value', value)
   for (const ref in refs) {
-    console.log('ref', refs);
-    console.log('refs[ref]', refs[ref])
-    console.log('refs[ref].value', refs[ref].value)
-    console.log('value[ref]', value[ref])
     refs[ref].value = value[ref]
   };
 

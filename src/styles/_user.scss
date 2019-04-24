@@ -1,17 +1,28 @@
-.img-user{
+.img-user {
   border-radius: 50%;
   width: 250px;
 }
 
-.card-deck{
-  .card{
+.card-deck {
+  .card {
     margin: 20px 0;
   }
-  .little-text{
+  .little-text {
     font-size: 12px;
   }
 }
 
-input:required{
-  
+.form {
+  .form-control {
+    &:active,
+    &:focus {
+      border: 1px solid red;
+      box-shadow: 0 0 7px -3px red;
+      transition: all 0.5s ease;
+    }
+
+    &:invalid {
+      border: 1px solid red;
+    }
+  }
 }
