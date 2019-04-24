@@ -19,47 +19,49 @@
         <h6>Welcome</h6>
         <p class="font-weight-bold lead js_closeOutButton cursor-pointer">x</p>
       </div>
-      <form>
+      <form class="form">
         <div class="row mt-2 mb-4">
           <div class="col">
-            <input type="text" class="form-control js_firstName" placeholder="First name">
+            <input required data-form="firstname" type="text" class="form-control" placeholder="First name">
           </div>
           <div class="col">
-            <input type="text" class="form-control js_lastName" placeholder="Last name">
-          </div>
-        </div>
-        <div class="row my-4">
-          <div class="col">
-            <input type="text" class="form-control js_mail" placeholder="Mail">
-          </div>
-          <div class="col">
-            <input type="text" class="form-control js_phone" placeholder="Phone">
+            <input required data-form="lastname" type="text" class="form-control" placeholder="Last name">
           </div>
         </div>
         <div class="row my-4">
           <div class="col">
-            <select id="inputState" class="form-control">
+            <input required data-form="email" type="text" class="form-control" placeholder="Mail">
+          </div>
+          <div class="col">
+            <input required data-form="phone" type="text" class="form-control" placeholder="Phone">
+          </div>
+        </div>
+        <div class="row my-4">
+          <div class="col">
+            <select required data-form="country" id="inputState" class="form-control">
               <option selected disabled>Country</option>
-              <option value="">Peru</option>
-              <option value="">Argentina</option>
-              <option value="">Brasil</option>
+              <option value="Peru">Peru</option>
+              <option value="Argentina">Argentina</option>
+              <option value="Brasil">Brasil</option>
             </select>
           </div>
           <div class="col">
-            <input type="text" class="form-control js_photoURL" placeholder="Photo URL">
+            <input required data-form="photoURL" type="text" class="form-control" placeholder="Photo URL">
           </div>
         </div>
 
         <div class="my-4">
-          <textarea class="form-control" rows="3" placeholder="About me"></textarea>
+          <textarea required data-form="about" class="form-control" rows="3" placeholder="About me"></textarea>
         </div>
 
         <div class="d-flex justify-content-around">
-          <button type="button" class="btn btn-outline-light px-5 js_closeOutButton js_acceptButton">Accept</button>
+          <button type="submit" class="btn btn-outline-light px-5 js_closeOutButton js_acceptButton">Accept</button>
           <button type="button" class="btn btn-outline-secondary px-5 js_closeOutButton">Cancel</button>
         </div>
       </form>
     </div>
+  </div>
+  <div class="container">
     <div class="card-deck js_newContent"></div>
   </div>
 

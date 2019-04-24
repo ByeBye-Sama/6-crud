@@ -1,44 +1,46 @@
 export default function Modal(opt) {
+  
   this.element = opt.element;
-  this.addEvents();
+  this.callback = opt.callbackAcept;
+  this.initEvents();
 }
 
 Modal.prototype.open = function openModal() {
+  const form = this.element.querySelector('form');
   this.element.classList.add('d-block');
+  form.reset();
 };
 
 Modal.prototype.close = function closeModal() {
   this.element.classList.remove('d-block');
 };
 
-Modal.prototype.addEvents = function addEvents() {
-  const accept = this.element.querySelector('.js_acceptButton');
-  accept.addEventListener('click', () => {
-    const firstName = document.querySelector('.js_firstName').value;
-    const lastName = document.querySelector('.js_lastName').value;
-    const mail = document.querySelector('js_mail').value;
-    const phone = document.querySelector('js_phone').value;
-    const photoURL = document.querySelector('js_photoURL').value;
-    const template = `
-    <div class="card">
-      <img src="${photoURL}" class="card-img-top">
-      <div class="card-body">
-        <h5 class="card-title">${firstName} ${lastName}</h5>
-        <p class="card-text">My contact is:</p>
-        <p class="card-text">Email: ${mail}</p>
-        <p class="card-text">Number: ${phone}</p>
-      </div>
-      <div class="card-footer">
-        <small class="text-muted">Last updated 3 mins ago</small>
-      </div>
-    </div>`;
-    document.querySelector('js_newContent').innerHTML = template;
-  });
+Modal.prototype.edit = function editModal() {
+  this.element.classList.add('d-block');
+};
 
+Modal.prototype.accept = function (callback) {
+  const form = this.element.querySelector('form');
+
+  function submit(e) {
+    e.preventDefault();
+    this.close();
+    callback();
+  }
+  form.onsubmit = submit.bind(this);
+};
+
+Modal.prototype.back = function closeModal() {
   const close = this.element.querySelectorAll('.js_closeOutButton');
+
   for (let i = 0; i < close.length; i += 1) {
     close[i].addEventListener('click', () => {
       this.close();
     });
   }
 };
+
+Modal.prototype.initEvents = function initEvents () {
+  this.accept(this.callback);
+  this.back();
+}
