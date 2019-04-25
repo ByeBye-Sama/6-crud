@@ -1,12 +1,17 @@
 import Modal from '../ui/modal';
 
+const dbase = "http://localhost:3000/users" 
+
+/* https://my-json-server.typicode.com/byebye-sama/server-local-test/users cloud db */
+/* http://localhost:3000/users local db */
+
 export function addUser() {
   setData(getRef().values).then(response => addDom(makeCard(response)));
   console.log("other");
 }
 
 export async function getData() {
-  const response = await fetch('http://localhost:3000/users')
+  const response = await fetch(dbase)
   const responseJson = await response.json();
 
   responseJson.forEach(values => {
@@ -16,7 +21,7 @@ export async function getData() {
 
 async function setData(values) {
   console.log("this work?", values);
-  const response = await fetch('http://localhost:3000/users', {
+  const response = await fetch(dbase, {
     method: 'POST',
     body: JSON.stringify(values),
     headers: {
@@ -27,14 +32,14 @@ async function setData(values) {
 }
 
 async function deleteData(id) {
-  fetch(`http://localhost:3000/users/${id}`, {
+  fetch(`${dbase}/${id}`, {
     method: 'DELETE'
   })
 }
 
 async function editData(id) {
   const {values} = getRef()
-  const  response = await fetch(`http://localhost:3000/users/${id}`, {
+  const  response = await fetch(`${dbase}/${id}`, {
     method: 'PUT',
     body: JSON.stringify(values),
     headers: {
