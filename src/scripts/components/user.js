@@ -1,7 +1,7 @@
 import Modal from '../ui/modal';
 
 export function addUser() {
-  addDom(makeCard(getRef().values));
+  setData(getRef().values).then(response => addDom(makeCard(response)));
   console.log("other");
 }
 
@@ -13,6 +13,37 @@ export async function getData() {
     addDom(makeCard(values));
   });
 }
+
+async function setData(values) {
+  console.log("this work?", values);
+  const response = await fetch('http://localhost:3000/users', {
+    method: 'POST',
+    body: JSON.stringify(values),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    }
+  })
+  return response;
+}
+
+async function deleteData(id) {
+  fetch(`http://localhost:3000/users/${id}`, {
+    method: 'DELETE'
+  })
+}
+
+async function editData(id) {
+  const {values} = getRef()
+  const  response = await fetch(`http://localhost:3000/users/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(values),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8"
+    }
+  })
+  return response;
+}
+
 
 function getRef() {
   const refs = {
@@ -64,7 +95,7 @@ function makeCard(value) {
   };
 
   card.querySelector('.js_delete').onclick = () => {
-    deleteCard(card);
+    deleteCard(card, value.id);
   }
   console.log("something");
 
@@ -73,6 +104,7 @@ function makeCard(value) {
 
 function makeCardHtml(value) {
   return `
+  <input type="hidden" value="${value.id}"/>
   <div class="card">
     <img src="${value.photoURL}" class="card-img-top img-user">
     <div class="card-body">
@@ -100,18 +132,21 @@ function editUser(div, value) {
     refs[ref].value = value[ref]
   };
 
+  console.log('value', value)
   const modal = new Modal({
     element: document.querySelector('.js_modal'),
     callbackAcept: () => {
-      setValues(div)
+      setValues(div);
+      editData(value.id); 
     }
   })
   modal.edit();
 }
 
-function deleteCard(div) {
+function deleteCard(div, id) {
   const sure = confirm("Are you sure?");
   if (sure == true) {
     div.remove();
+    deleteData(id);
   }
 }
