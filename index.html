@@ -30,7 +30,7 @@
         </div>
         <div class="row my-4">
           <div class="col">
-            <input required data-form="email" type="text" class="form-control" placeholder="Mail">
+            <input required data-form="email" type="email" class="form-control" placeholder="Mail">
           </div>
           <div class="col">
             <input required pattern="\d{1,9}" data-form="phone" type="text" class="form-control" placeholder="Phone">
@@ -39,14 +39,14 @@
         <div class="row my-4">
           <div class="col">
             <select required data-form="country" id="inputState" class="form-control">
-              <option selected disabled>Country</option>
+              <option selected disabled value="">Country</option>
               <option value="Peru">Peru</option>
               <option value="Argentina">Argentina</option>
               <option value="Brasil">Brasil</option>
             </select>
           </div>
           <div class="col">
-            <input required data-form="photoURL" type="text" class="form-control" placeholder="Photo URL">
+            <input required data-form="photoURL" type="url" class="form-control" placeholder="Photo URL">
           </div>
         </div>
 

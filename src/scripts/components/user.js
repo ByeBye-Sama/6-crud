@@ -1,8 +1,17 @@
 import Modal from '../ui/modal';
 
-export default function addUser() {
+export function addUser() {
   addDom(makeCard(getRef().values));
   console.log("other");
+}
+
+export async function getData() {
+  const response = await fetch('http://localhost:3000/users')
+  const responseJson = await response.json();
+
+  responseJson.forEach(values => {
+    addDom(makeCard(values));
+  });
 }
 
 function getRef() {

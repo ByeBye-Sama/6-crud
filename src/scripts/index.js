@@ -1,7 +1,8 @@
 import '../styles/index.scss';
 import Modal from './ui/modal';
-import addUser from './components/user';
+import {addUser, getData} from './components/user';
 
+getData();
 function popOutModal() {
   const popOutButton = document.querySelector('.js_popOutButton');
   popOutButton.addEventListener('click', () => {

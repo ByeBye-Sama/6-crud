@@ -1,5 +1,4 @@
 export default function Modal(opt) {
-  
   this.element = opt.element;
   this.callback = opt.callbackAcept;
   this.initEvents();

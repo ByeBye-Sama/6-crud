@@ -5,7 +5,8 @@
 
 .card-deck {
   .card {
-    margin: 20px 0;
+    margin: 10px;
+    width: 250px;
   }
   .little-text {
     font-size: 12px;
@@ -13,16 +14,24 @@
 }
 
 .form {
-  .form-control {
+  input,
+  select,
+  textarea {
     &:active,
     &:focus {
-      border: 1px solid red;
-      box-shadow: 0 0 7px -3px red;
+      border:none;
+      box-shadow: none;
+    }
+
+    &:valid {
+      border: 2px solid #17a2b8;
+      box-shadow: 0 0 15px -4px #17a2b8;
       transition: all 0.5s ease;
     }
 
     &:invalid {
-      border: 1px solid red;
+      border: 1px solid #dc3545;
+      box-shadow: 0 0 8px -2px #dc3545;
     }
   }
 }
