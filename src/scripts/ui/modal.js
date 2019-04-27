@@ -18,7 +18,7 @@ Modal.prototype.edit = function editModal() {
   this.element.classList.add('d-block');
 };
 
-Modal.prototype.accept = function (callback) {
+Modal.prototype.accept = function acceptModal(callback) {
   const form = this.element.querySelector('form');
 
   function submit(e) {
@@ -39,7 +39,7 @@ Modal.prototype.back = function closeModal() {
   }
 };
 
-Modal.prototype.initEvents = function initEvents () {
+Modal.prototype.initEvents = function initEvents() {
   this.accept(this.callback);
   this.back();
-}
+};

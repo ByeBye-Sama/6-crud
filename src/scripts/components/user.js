@@ -1,7 +1,7 @@
 import Modal from '../ui/modal';
 
-const dbase = "http://localhost:3000/users"
-const publicKey = "$2a$10$G/R/PKN67hkIWVzNN2JZ8OkMS282LFUXWlx2GpLlychiVkbDMWVfy" 
+const dbase = 'http://localhost:3000/users';
+const publicKey = '$2a$10$G/R/PKN67hkIWVzNN2JZ8OkMS282LFUXWlx2GpLlychiVkbDMWVfy';
 
 /* https://my-json-server.typicode.com/byebye-sama/server-local-test/users cloud db */
 /* http://localhost:3000/users local db */
@@ -9,28 +9,26 @@ const publicKey = "$2a$10$G/R/PKN67hkIWVzNN2JZ8OkMS282LFUXWlx2GpLlychiVkbDMWVfy"
 
 export function addUser() {
   setData(getRef().values).then(response => addDom(makeCard(response)));
-  console.log("other");
 }
 
 export async function getData() {
-  const response = await fetch(dbase)
+  const response = await fetch(dbase);
   const responseJson = await response.json();
 
-  responseJson.forEach(values => {
+  responseJson.forEach((values) => {
     addDom(makeCard(values));
   });
 }
 
 async function setData(values) {
-  console.log("this work?", values);
   const response = await fetch(dbase, {
     method: 'POST',
     body: JSON.stringify(values),
     headers: {
-      "Content-type": "application/json; charset=UTF-8",
-      "secret-key": publicKey,
-    }
-  })
+      'Content-type': 'application/json; charset=UTF-8',
+      'secret-key': publicKey,
+    },
+  });
   return response;
 }
 
@@ -38,24 +36,24 @@ async function deleteData(id) {
   fetch(`${dbase}/${id}`, {
     method: 'DELETE',
     headers: {
-      "Content-type": "application/json; charset=UTF-8",
-      "secret-key": publicKey,
-      "private": "false"
-    }
-  })
+      'Content-type': 'application/json; charset=UTF-8',
+      'secret-key': publicKey,
+      'private': 'false',
+    },
+  });
 }
 
 async function editData(id) {
-  const {values} = getRef()
-  const  response = await fetch(`${dbase}/${id}`, {
+  const { values } = getRef();
+  const response = await fetch(`${dbase}/${id}`, {
     method: 'PUT',
     body: JSON.stringify(values),
     headers: {
-      "Content-type": "application/json; charset=UTF-8",
-      "secret-key": publicKey,
-      "private": "false"
-    }
-  })
+      'Content-type': 'application/json; charset=UTF-8',
+      'secret-key': publicKey,
+      'private': 'false',
+    },
+  });
   return response;
 }
 
@@ -68,8 +66,8 @@ function getRef() {
     phone: document.querySelector('.js_modal').querySelector('[data-form="phone"]'),
     country: document.querySelector('.js_modal').querySelector('select[data-form="country"]'),
     photoURL: document.querySelector('.js_modal').querySelector('[data-form="photoURL"]'),
-    about: document.querySelector('.js_modal').querySelector('[data-form="about"]')
-  }
+    about: document.querySelector('.js_modal').querySelector('[data-form="about"]'),
+  };
 
   const values = {
     firstName: refs.firstName.value,
@@ -78,12 +76,12 @@ function getRef() {
     phone: refs.phone.value,
     country: refs.country.value,
     photoURL: refs.photoURL.value,
-    about: refs.about.value
-  }
+    about: refs.about.value,
+  };
 
   return {
     refs,
-    values
+    values,
   };
 }
 
@@ -97,13 +95,12 @@ function setValues(element) {
 
   element.querySelector('.js_delete').onclick = () => {
     deleteCard(element);
-  }
+  };
 }
 
 function makeCard(value) {
-
   const card = document.createElement('div');
-  card.innerHTML = makeCardHtml(value)
+  card.innerHTML = makeCardHtml(value);
 
   card.querySelector('.js_edit').onclick = () => {
     editUser(card, value);
@@ -111,8 +108,7 @@ function makeCard(value) {
 
   card.querySelector('.js_delete').onclick = () => {
     deleteCard(card, value.id);
-  }
-  console.log("something");
+  };
 
   return card;
 }
@@ -137,30 +133,29 @@ function makeCardHtml(value) {
 }
 
 function addDom(element) {
-  const div = document.querySelector('.js_newContent')
+  const div = document.querySelector('.js_newContent');
   div.appendChild(element);
 }
 
 function editUser(div, value) {
   const { refs } = getRef();
   for (const ref in refs) {
-    refs[ref].value = value[ref]
-  };
+    refs[ref].value = value[ref];
+  }
 
-  console.log('value', value)
   const modal = new Modal({
     element: document.querySelector('.js_modal'),
     callbackAcept: () => {
       setValues(div);
-      editData(value.id); 
-    }
-  })
+      editData(value.id);
+    },
+  });
   modal.edit();
 }
 
 function deleteCard(div, id) {
-  const sure = confirm("Are you sure?");
-  if (sure == true) {
+  const sure = confirm('Are you sure?');
+  if (sure === true) {
     div.remove();
     deleteData(id);
   }
