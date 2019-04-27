@@ -1,9 +1,11 @@
 import Modal from '../ui/modal';
 
-const dbase = "http://localhost:3000/users" 
+const dbase = "http://localhost:3000/users"
+const publicKey = "$2a$10$G/R/PKN67hkIWVzNN2JZ8OkMS282LFUXWlx2GpLlychiVkbDMWVfy" 
 
 /* https://my-json-server.typicode.com/byebye-sama/server-local-test/users cloud db */
 /* http://localhost:3000/users local db */
+/* https://api.jsonbin.io/b/5cc3a862f1172a287e1fe330/latest */
 
 export function addUser() {
   setData(getRef().values).then(response => addDom(makeCard(response)));
@@ -25,7 +27,8 @@ async function setData(values) {
     method: 'POST',
     body: JSON.stringify(values),
     headers: {
-      "Content-type": "application/json; charset=UTF-8"
+      "Content-type": "application/json; charset=UTF-8",
+      "secret-key": publicKey,
     }
   })
   return response;
@@ -33,7 +36,12 @@ async function setData(values) {
 
 async function deleteData(id) {
   fetch(`${dbase}/${id}`, {
-    method: 'DELETE'
+    method: 'DELETE',
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+      "secret-key": publicKey,
+      "private": "false"
+    }
   })
 }
 
@@ -43,7 +51,9 @@ async function editData(id) {
     method: 'PUT',
     body: JSON.stringify(values),
     headers: {
-      "Content-type": "application/json; charset=UTF-8"
+      "Content-type": "application/json; charset=UTF-8",
+      "secret-key": publicKey,
+      "private": "false"
     }
   })
   return response;

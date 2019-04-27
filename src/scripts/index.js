@@ -1,6 +1,6 @@
 import '../styles/index.scss';
 import Modal from './ui/modal';
-import {addUser, getData} from './components/user';
+import { addUser, getData } from './components/user';
 
 getData();
 function popOutModal() {
@@ -8,7 +8,7 @@ function popOutModal() {
   popOutButton.addEventListener('click', () => {
     const modal = new Modal({
       element: document.querySelector('.js_modal'),
-      callbackAcept: addUser
+      callbackAcept: addUser,
     });
     modal.open();
   });
