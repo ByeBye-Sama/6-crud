@@ -15,7 +15,7 @@ export async function getData() {
   const response = await fetch(dbase);
   const responseJson = await response.json();
 
-  responseJson.forEach((values) => {
+  responseJson.forEach((values) => { // if you use cloud db instead use responseJson.users.forEach
     addDom(makeCard(values));
   });
 }
